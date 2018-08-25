@@ -20,6 +20,7 @@ export class NotesComponent implements OnInit {
   textSize: string;
   keywordName: string;
   extract: string;
+  noteDialog: any;
   wikiDialog: any;
   userNotes: Note[] = new Array();
   auths: AuthService;
@@ -49,9 +50,9 @@ export class NotesComponent implements OnInit {
     const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
     const util = mdcDialog.util;
 
-    const dialog = new MDCDialog(document.querySelector('#myd'));
+    this.noteDialog = new MDCDialog(document.querySelector('#myd'));
 
-    dialog.show();
+    this.noteDialog.show();
   }
 
   openWikiDialog(clicked: string) {
@@ -93,6 +94,12 @@ export class NotesComponent implements OnInit {
       textSize: this.textSize,
       uid: this.user.uid
     });
+
+    this.concepts = new Array();
+    this.noteTitle = '';
+    this.noteContent = '';
+    this.textSize = '';
+    this.noteDialog.close();
   }
 
   closeWikiDialog() {
