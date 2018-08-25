@@ -45,7 +45,7 @@ export class NotesComponent implements OnInit {
   }
 
   saveNote() {
-    const note = new Note()
+   // const note = new Note()
   }
 
 
