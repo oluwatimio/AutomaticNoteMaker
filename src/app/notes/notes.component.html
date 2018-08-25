@@ -50,7 +50,7 @@
     </div>
     <footer class="mdc-dialog__footer" style="bottom: 0;">
       <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel" style="color: #880e4f">CANCEL</button>
-      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f">RESEARCH</button>
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f" (click)="saveNote()">RESEARCH</button>
     </footer>
      </div>
   <div class="mdc-dialog__backdrop"></div>
@@ -71,9 +71,9 @@
 </aside>
 
 <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 2vh; margin-bottom: 2vh">
-  <mat-card style="height: 150px; width: 250px; border-radius: 15px;">
+  <mat-card *ngFor="let note of userNotes" style="height: 150px; width: 250px; border-radius: 15px;">
   <mat-card-header>
-  <mat-card-title>Unit 1: Biology</mat-card-title>
+  <mat-card-title>{{note.title}}</mat-card-title>
   <mat-card-subtitle style="color: darkmagenta; font-size: 12px">August 25, 2018 </mat-card-subtitle>
   </mat-card-header>
   </mat-card>

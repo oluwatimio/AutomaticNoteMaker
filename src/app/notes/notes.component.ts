@@ -21,6 +21,7 @@ export class NotesComponent implements OnInit {
   keywordName: string;
   extract: string;
   wikiDialog: any;
+  userNotes: Note[] = new Array();
   auths: AuthService;
   user: any;
   constructor(private http: HttpClient, auths: AuthService) {
@@ -35,8 +36,9 @@ export class NotesComponent implements OnInit {
 
   ngOnInit() {
     this.auths.user.subscribe((user) => {
-      if (user !== undefined && user !== null){
+      if (user !== undefined && user !== null) {
         this.user = user;
+        this.downloadNotes();
       }
     });
   }
@@ -111,6 +113,19 @@ export class NotesComponent implements OnInit {
       obj.split('\n')[6] + '\n' + obj.split('\n')[7] + '\n' + obj.split('\n')[8];
       this.extract = short;
       console.log(short);
+    });
+  }
+
+  downloadNotes() {
+    const db = firebase.firestore();
+
+    db.collection('userNotes').where('uid', '==', this.user.uid).onSnapshot((querySnapshot) => {
+      this.userNotes = new Array();
+
+      querySnapshot.forEach((doc) => {
+         const note = new Note(doc.data().concepts, doc.data().noteTitle, doc.data().noteContent, doc.data().textSize );
+         this.userNotes.push(note);
+      });
     });
   }
 
