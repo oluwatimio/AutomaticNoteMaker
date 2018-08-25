@@ -13,8 +13,14 @@ export class NotesComponent implements OnInit {
   textSizes = [9, 10, 11, 12, 13, 14, 18, 24, 36, 48, 64, 72];
   concepts: string[] = new Array();
   concept: string;
+  noteTitle: string;
+  noteContent: string;
+  textSize: string;
   constructor(private http: HttpClient) {
     this.concept = '';
+    this.noteTitle = '';
+    this.noteContent = '';
+    this.textSize = '20px';
   }
 
   ngOnInit() {
@@ -34,18 +40,20 @@ export class NotesComponent implements OnInit {
   }
 
   changeTextSizes(number: any) {
-
     console.log(number);
     document.getElementById('textSize').style.fontSize = number.toString() + 'px';
+    this.textSize = number.toString();
   }
 
   addConcept() {
-    this.concepts.push(this.concept);
-    this.concept = '';
+    if (this.concept != '') {
+      this.concepts.push(this.concept);
+      this.concept = '';
+    }
   }
 
   saveNote() {
-    const note = new Note()
+    const note = new Note(this.concepts, this.noteTitle, this.noteContent, this.textSize);
   }
 
 
