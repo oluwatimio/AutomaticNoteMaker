@@ -16,11 +16,16 @@ export class NotesComponent implements OnInit {
   noteTitle: string;
   noteContent: string;
   textSize: string;
+  keywordName: string;
+  extract: string;
+  wikiDialog: any;
   constructor(private http: HttpClient) {
     this.concept = '';
     this.noteTitle = '';
     this.noteContent = '';
     this.textSize = '20px';
+    this.keywordName = '';
+    this.extract = '';
   }
 
   ngOnInit() {
@@ -35,8 +40,20 @@ export class NotesComponent implements OnInit {
     const dialog = new MDCDialog(document.querySelector('#myd'));
 
     dialog.show();
+  }
 
+  openWikiDialog(clicked: string) {
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
 
+    this.wikiDialog = new MDCDialog(document.querySelector('#wikiDialog'));
+
+    this.keywordName = clicked;
+    this.getData(clicked);
+
+    this.wikiDialog.show();
   }
 
   changeTextSizes(number: any) {
@@ -60,10 +77,20 @@ export class NotesComponent implements OnInit {
 >>>>>>> df484a5b5e2ee0fa82ff756b5421affcbfc69f21
   }
 
+  addToNote(text: string) {
+    this.noteContent = this.noteContent + '\n\n' + text;
+    this.wikiDialog.close();
+  }
 
   getData(clicked: string) {
     this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=' + clicked, 'callback').subscribe((data) => {
-      console.log(data);
+      var pages = data['query']['pages'];
+      var obj = pages[Object.keys(pages)[0]]['extract'];
+      var short = obj.split('\n')[0] + '\n' + obj.split('\n')[1] + '\n' + obj.split('\n')[2] + 
+      obj.split('\n')[3] + '\n' + obj.split('\n')[4] + '\n' + obj.split('\n')[5] + 
+      obj.split('\n')[6] + '\n' + obj.split('\n')[7] + '\n' + obj.split('\n')[8];
+      this.extract = short;
+      console.log(short);
     });
   }
 
