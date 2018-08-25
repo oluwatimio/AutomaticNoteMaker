@@ -64,6 +64,7 @@
         <p style="margin-left: 2vh; margin-right: 2vh">{{extract}}</p>
       </body>
       <footer class="mdc-dialog__footer">
+          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeWikiDialog(extract)">CANCEL</button>
         <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote(extract)">ADD TO NOTE</button>
       </footer>
   </div>
@@ -73,7 +74,7 @@
   <mat-card style="height: 150px; width: 250px; border-radius: 15px;">
   <mat-card-header>
   <mat-card-title>Unit 1: Biology</mat-card-title>
-  <mat-card-subtitle>August 25, 2018 </mat-card-subtitle>
+  <mat-card-subtitle style="color: darkmagenta; font-size: 12px">August 25, 2018 </mat-card-subtitle>
   </mat-card-header>
   </mat-card>
 </div>

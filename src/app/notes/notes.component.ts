@@ -93,6 +93,10 @@ export class NotesComponent implements OnInit {
     });
   }
 
+  closeWikiDialog() {
+    this.wikiDialog.close();
+  }
+
   addToNote(text: string) {
     this.noteContent = this.noteContent + '\n\n' + text;
     this.wikiDialog.close();
