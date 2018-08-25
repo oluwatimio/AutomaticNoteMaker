@@ -60,7 +60,12 @@
   <div class="mdc-dialog__surface" id="wikiDialogSurface">
       <h1 style="color: #880e4f; margin-left: 1vw ">{{keywordName}}</h1>
 
-      <p>{{extract}}</p>
+      <body style="overflow-y: auto;">
+        <p style="margin-left: 2vh; margin-right: 2vh">{{extract}}</p>
+      </body>
+      <footer class="mdc-dialog__footer">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote(extract)">ADD TO NOTE</button>
+      </footer>
   </div>
 </aside>
 
