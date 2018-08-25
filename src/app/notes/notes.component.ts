@@ -70,11 +70,11 @@ export class NotesComponent implements OnInit {
   }
 
   saveNote() {
-<<<<<<< HEAD
-   // const note = new Note()
-=======
     const note = new Note(this.concepts, this.noteTitle, this.noteContent, this.textSize);
->>>>>>> df484a5b5e2ee0fa82ff756b5421affcbfc69f21
+  }
+
+  closeWikiDialog() {
+    this.wikiDialog.close();
   }
 
   addToNote(text: string) {
