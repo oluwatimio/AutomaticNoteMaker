@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SigninComponent } from './signin/signin.component';
+import {AuthService} from './auth.service';
 
 const routes: Routes = [
   {path: '', component: TabsComponent},
@@ -68,7 +69,7 @@ const routes: Routes = [
     MatDialogModule,
     MatListModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

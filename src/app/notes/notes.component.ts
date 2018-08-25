@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Note} from './Note';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../auth.service';
+import * as firebase from 'firebase';
 
 declare var require: any;
 
@@ -19,16 +21,24 @@ export class NotesComponent implements OnInit {
   keywordName: string;
   extract: string;
   wikiDialog: any;
-  constructor(private http: HttpClient) {
+  auths: AuthService;
+  user: any;
+  constructor(private http: HttpClient, auths: AuthService) {
     this.concept = '';
     this.noteTitle = '';
     this.noteContent = '';
     this.textSize = '20px';
     this.keywordName = '';
     this.extract = '';
+    this.auths = auths;
   }
 
   ngOnInit() {
+    this.auths.user.subscribe((user) => {
+      if (user !== undefined && user !== null){
+        this.user = user;
+      }
+    });
   }
 
   openDiag() {
@@ -63,18 +73,24 @@ export class NotesComponent implements OnInit {
   }
 
   addConcept() {
-    if (this.concept != '') {
+    if (this.concept !== '') {
       this.concepts.push(this.concept);
       this.concept = '';
     }
   }
 
   saveNote() {
-<<<<<<< HEAD
-   // const note = new Note()
-=======
     const note = new Note(this.concepts, this.noteTitle, this.noteContent, this.textSize);
->>>>>>> df484a5b5e2ee0fa82ff756b5421affcbfc69f21
+
+    const db = firebase.firestore();
+
+    db.collection('userNotes').add({
+      concepts: this.concepts,
+      noteTitle: this.noteTitle,
+      noteContent: this.noteContent,
+      textSize: this.textSize,
+      uid: this.user.uid
+    });
   }
 
   addToNote(text: string) {
