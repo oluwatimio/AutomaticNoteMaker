@@ -27,7 +27,7 @@
         <h1 style="margin-left: 1vw; color: #880e4f">Add Keywords or Concepts</h1>
         <div style="margin-left: 1vw">
           <mat-chip-list>
-            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f">{{concept}}</mat-chip>
+            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f" (click)="getData(concept)">{{concept}}</mat-chip>
           </mat-chip-list>
         </div>
         <form class="example-form" style="bottom: 50px; position: fixed; margin-left: 1vw">

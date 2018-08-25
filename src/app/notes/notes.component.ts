@@ -57,8 +57,8 @@ export class NotesComponent implements OnInit {
   }
 
 
-  getData() {
-    this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=anatomy', 'callback').subscribe((data) => {
+  getData(clicked: string) {
+    this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=' + clicked, 'callback').subscribe((data) => {
       console.log(data);
     });
   }
