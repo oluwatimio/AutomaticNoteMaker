@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 20vh">
+  <img src=".././assets/1f195.png">
+  <div class="mdc-text-field mdc-text-field--outlined email" style="margin-top: 5vh">
+    <input type="text" id="tf-outlined" class="mdc-text-field__input" [value] = "email"
+           (input) = "email = $event.target.value">
+    <label for="tf-outlined" class="mdc-floating-label">Email</label>
+    <div class="mdc-notched-outline">
+      <svg>
+        <path class="mdc-notched-outline__path"/>
+      </svg>
+    </div>
+    <div class="mdc-notched-outline__idle"></div>
+  </div>
+  <div class="mdc-text-field mdc-text-field--outlined passt" style="margin-top: 2vh">
+    <input type="text" id="tf-outlined" class="mdc-text-field__input" type="password" [value] = "password"
+           (input) = "password = $event.target.value">
+    <label for="tf-outlined" class="mdc-floating-label">Password</label>
+    <div class="mdc-notched-outline">
+      <svg>
+        <path class="mdc-notched-outline__path"/>
+      </svg>
+    </div>
+    <div class="mdc-notched-outline__idle"></div>
+  </div>
+  <button mat-flat-button (click)="signIn()" style="background-color: #880e4f">Sign In</button>
+</div>
