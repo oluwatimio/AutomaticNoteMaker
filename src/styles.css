@@ -32,3 +32,8 @@ label{
   width: 50%;
   height: 90%;
 }
+
+#shareDialogSurface {
+  width: 30%;
+  height: 30%;
+}

@@ -24,10 +24,12 @@ export class NotesComponent implements OnInit {
   extract: string;
   noteDialog: any;
   wikiDialog: any;
+  shareDialog: any;
   userNotes: NoteDownloaded[] = new Array();
   auths: AuthService;
   user: any;
   viewingNote: NoteDownloaded;
+  groupCode: string;
   constructor(private http: HttpClient, auths: AuthService, public snackbar: MatSnackBar) {
     this.concept = '';
     this.noteTitle = '';
@@ -36,6 +38,7 @@ export class NotesComponent implements OnInit {
     this.keywordName = '';
     this.extract = '';
     this.auths = auths;
+    this.groupCode = '';
   }
 
   ngOnInit() {
@@ -70,6 +73,16 @@ export class NotesComponent implements OnInit {
     this.getData(clicked);
 
     this.wikiDialog.show();
+  }
+
+  openShareDialog() {
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
+
+    this.shareDialog = new MDCDialog(document.querySelector('#shareDialog'));
+    this.shareDialog.show();
   }
 
   changeTextSizes(number: any) {
@@ -107,6 +120,10 @@ export class NotesComponent implements OnInit {
 
   closeWikiDialog() {
     this.wikiDialog.close();
+  }
+
+  closeShareDialog() {
+    this.shareDialog.close();
   }
 
   addToNote(text: string) {
@@ -155,6 +172,7 @@ export class NotesComponent implements OnInit {
 
     this.noteDialog.show();
   }
+
   updateNote() {
     const db = firebase.firestore().collection('userNotes').doc(this.viewingNote.docRef).update({
       concepts: this.concepts,
@@ -168,6 +186,14 @@ export class NotesComponent implements OnInit {
       this.noteContent = '';
       this.textSize = '';
       this.snackbar.open('Note Updated', null, {duration: 5000});
+    });
+  }
+
+  updateNoteCode() {
+    const db = firebase.firestore().collection('userNotes').doc(this.viewingNote.docRef).update({
+      shareCode: this.groupCode
+    }).then(() => {
+      this.snackbar.open('Your share code has been added', null, {duration: 5000});
     });
   }
 

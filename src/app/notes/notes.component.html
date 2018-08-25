@@ -76,6 +76,7 @@
         <button mat-icon-button style="font-size: 15px; color: #880e4f;">B</button>
         <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">I</button>
         <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">U</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; position: absolute; right: 1vw; margin-top: 1vw" (click)="openShareDialog()">SHARE</button>
       </form>
     </div>
     <mat-divider></mat-divider>
@@ -121,11 +122,25 @@
       </body>
       <footer class="mdc-dialog__footer">
           <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeWikiDialog(extract)">CANCEL</button>
-        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote(extract)">ADD TO NOTE</button>
+          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote(extract)">ADD TO NOTE</button>
       </footer>
   </div>
 </aside>
-
+<aside class="mdc-dialog" id="shareDialog">
+    <div class="mdc-dialog__surface" id="shareDialogSurface">
+        <h1 style="color: #880e4f; margin-left: 1vw ">Share {{noteTitle}} with...</h1>
+        <form class="example-form" style="margin-left: 1vw; margin-right: 1vw">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Group Code" style="font-size: large; color: black" [value]="groupCode"
+              (input) = "groupCode = $event.target.value">
+            </mat-form-field>
+          </form>
+        <footer class="mdc-dialog__footer">
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeShareDialog()">CANCEL</button>
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="updateNoteCode()">SHARE</button>
+        </footer>
+    </div>
+  </aside>
 <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-top: 2vh; margin-bottom: 2vh">
   <mat-card *ngFor="let note of userNotes"
             style="height: 150px; width: 250px;
