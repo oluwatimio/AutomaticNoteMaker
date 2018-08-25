@@ -3,6 +3,8 @@ import {Note} from './Note';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../auth.service';
 import * as firebase from 'firebase';
+import {NoteDownloaded} from './NoteDownloaded';
+import {MatSnackBar} from '@angular/material';
 
 declare var require: any;
 
@@ -22,10 +24,11 @@ export class NotesComponent implements OnInit {
   extract: string;
   noteDialog: any;
   wikiDialog: any;
-  userNotes: Note[] = new Array();
+  userNotes: NoteDownloaded[] = new Array();
   auths: AuthService;
   user: any;
-  constructor(private http: HttpClient, auths: AuthService) {
+  viewingNote: NoteDownloaded;
+  constructor(private http: HttpClient, auths: AuthService, public snackbar: MatSnackBar) {
     this.concept = '';
     this.noteTitle = '';
     this.noteContent = '';
@@ -130,10 +133,57 @@ export class NotesComponent implements OnInit {
       this.userNotes = new Array();
 
       querySnapshot.forEach((doc) => {
-         const note = new Note(doc.data().concepts, doc.data().noteTitle, doc.data().noteContent, doc.data().textSize );
+         const note = new NoteDownloaded(doc.data().concepts, doc.data().noteTitle, doc.data().noteContent, doc.data().textSize, doc.id);
          this.userNotes.push(note);
       });
     });
   }
+
+  viewNote(note: NoteDownloaded) {
+    this.noteTitle = note.title;
+    this.concepts = note.concepts;
+    this.noteContent = note.note;
+    this.viewingNote = note;
+    document.getElementById('textSize').style.fontSize = note.textSize + 'px';
+
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
+
+    this.noteDialog = new MDCDialog(document.querySelector('#viewandEdit'));
+
+    this.noteDialog.show();
+  }
+  updateNote() {
+    const db = firebase.firestore().collection('userNotes').doc(this.viewingNote.docRef).update({
+      concepts: this.concepts,
+      noteTitle: this.noteTitle,
+      noteContent: this.noteContent,
+      textSize: this.textSize,
+    }).then(() => {
+      this.closeDiag();
+      this.concepts = new Array();
+      this.noteTitle = '';
+      this.noteContent = '';
+      this.textSize = '';
+      this.snackbar.open('Note Updated', null, {duration: 5000});
+    });
+  }
+
+  closeDiag() {
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
+
+    this.noteDialog = new MDCDialog(document.querySelector('#viewandEdit'));
+
+    this.noteTitle = '';
+    this.concepts = new Array();
+    this.noteContent = '';
+    this.viewingNote = undefined;
+  }
+
 
 }

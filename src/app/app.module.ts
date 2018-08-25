@@ -11,6 +11,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { TabsComponent } from './tabs/tabs.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSnackBarModule} from '@angular/material';
 import {
   MatButtonModule,
   MatChipsModule, MatDialogModule,
@@ -25,10 +26,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SigninComponent } from './signin/signin.component';
 import {AuthService} from './auth.service';
+import { OnboardingComponent } from './onboarding/onboarding.component';
 
 const routes: Routes = [
   {path: '', component: TabsComponent},
-  {path: 'signin', component: SigninComponent}
+  {path: 'signin', component: SigninComponent},
+  {path: 'onboard', component: OnboardingComponent}
 ];
 
 @NgModule({
@@ -39,7 +42,8 @@ const routes: Routes = [
     SharedNotesComponent,
     ToolbarComponent,
     TabsComponent,
-    SigninComponent
+    SigninComponent,
+    OnboardingComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,7 @@ const routes: Routes = [
     MatDividerModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatSnackBarModule,
     MatChipsModule,
     MatIconModule,
     MatOptionModule,

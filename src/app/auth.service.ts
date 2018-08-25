@@ -30,7 +30,7 @@ export class AuthService {
 
   signUp(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((response) => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('onboard');
     }).catch((error) => {
       alert(error.message);
     });
