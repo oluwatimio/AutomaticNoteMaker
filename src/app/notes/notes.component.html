@@ -27,7 +27,7 @@
         <h1 style="margin-left: 1vw; color: #880e4f">Add Keywords or Concepts</h1>
         <div style="margin-left: 1vw">
           <mat-chip-list>
-            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f" (click)="getData(concept)">{{concept}}</mat-chip>
+            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f" (click)="openWikiDialog(concept)">{{concept}}</mat-chip>
           </mat-chip-list>
         </div>
         <form class="example-form" style="bottom: 50px; position: fixed; margin-left: 1vw">
@@ -54,6 +54,14 @@
     </footer>
      </div>
   <div class="mdc-dialog__backdrop"></div>
+</aside>
+
+<aside class="mdc-dialog" id="wikiDialog">
+  <div class="mdc-dialog__surface" id="wikiDialogSurface">
+      <h1 style="color: #880e4f; margin-left: 1vw ">{{keywordName}}</h1>
+
+      <p>{{extract}}</p>
+  </div>
 </aside>
 
 <div fxLayout="row" fxLayoutAlign="center center" style="margin-top: 2vh; margin-bottom: 2vh">

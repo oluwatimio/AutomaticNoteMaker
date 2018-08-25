@@ -16,11 +16,15 @@ export class NotesComponent implements OnInit {
   noteTitle: string;
   noteContent: string;
   textSize: string;
+  keywordName: string;
+  extract: string;
   constructor(private http: HttpClient) {
     this.concept = '';
     this.noteTitle = '';
     this.noteContent = '';
     this.textSize = '20px';
+    this.keywordName = '';
+    this.extract = '';
   }
 
   ngOnInit() {
@@ -35,8 +39,20 @@ export class NotesComponent implements OnInit {
     const dialog = new MDCDialog(document.querySelector('#myd'));
 
     dialog.show();
+  }
 
+  openWikiDialog(clicked: string) {
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
 
+    const dialog = new MDCDialog(document.querySelector('#wikiDialog'));
+
+    this.keywordName = clicked;
+    this.getData(clicked);
+
+    dialog.show();
   }
 
   changeTextSizes(number: any) {
@@ -59,7 +75,10 @@ export class NotesComponent implements OnInit {
 
   getData(clicked: string) {
     this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=' + clicked, 'callback').subscribe((data) => {
-      console.log(data);
+      var pages = data['query']['pages'];
+      var obj = pages[Object.keys(pages)[0]]['extract'];
+      this.extract = obj;
+      console.log(obj);
     });
   }
 
