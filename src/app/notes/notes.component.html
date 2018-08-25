@@ -4,7 +4,8 @@
       <div fxLayout="row" style="width: 100%; margin-left: 1vw">
         <form class="example-form">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Title" value="" style="font-size: large; color: black">
+            <input matInput placeholder="Title" style="font-size: large; color: black" [value]="noteTitle"
+            (input) = "noteTitle = $event.target.value">
           </mat-form-field>
         </form>
         <form class="example-form">
@@ -41,7 +42,8 @@
       <div style="width: 80%">
         <section id="my-mdc-dialog-description" class="mdc-dialog__body" style="height: 80vh">
           <mat-form-field class="example-full-width" style="">
-            <textarea matInput cols="30" rows="32" placeholder="Type here" style="color: black" id="textSize"></textarea>
+            <textarea matInput cols="30" rows="32" placeholder="Type here" style="color: black" id="textSize" [value]="noteContent"
+            (input) = "noteContent = $event.target.value"></textarea>
           </mat-form-field>
         </section>
       </div>
