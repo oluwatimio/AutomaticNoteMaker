@@ -4,7 +4,8 @@
       <div fxLayout="row" style="width: 100%; margin-left: 1vw">
         <form class="example-form">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Title" value="" style="font-size: large; color: black">
+            <input matInput placeholder="Title" style="font-size: large; color: black" [value]="noteTitle"
+            (input) = "noteTitle = $event.target.value">
           </mat-form-field>
         </form>
         <form class="example-form">
@@ -26,7 +27,7 @@
         <h1 style="margin-left: 1vw; color: #880e4f">Add Keywords or Concepts</h1>
         <div style="margin-left: 1vw">
           <mat-chip-list>
-            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f">{{concept}}</mat-chip>
+            <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f" (click)="getData(concept)">{{concept}}</mat-chip>
           </mat-chip-list>
         </div>
         <form class="example-form" style="bottom: 50px; position: fixed; margin-left: 1vw">
@@ -41,7 +42,8 @@
       <div style="width: 80%">
         <section id="my-mdc-dialog-description" class="mdc-dialog__body" style="height: 80vh">
           <mat-form-field class="example-full-width" style="">
-            <textarea matInput cols="30" rows="32" placeholder="Type here" style="color: black" id="textSize"></textarea>
+            <textarea matInput cols="30" rows="32" placeholder="Type here" style="color: black" id="textSize" [value]="noteContent"
+            (input) = "noteContent = $event.target.value"></textarea>
           </mat-form-field>
         </section>
       </div>
@@ -63,4 +65,4 @@
   </mat-card>
 </div>
 
-<button mat-fab style="background-color: #880e4f; bottom: 20px; position: fixed; right: 20px" (click)="getData()"><i class="material-icons">add</i></button>
+<button mat-fab style="background-color: #880e4f; bottom: 20px; position: fixed; right: 20px" (click)="openDiag()"><i class="material-icons">add</i></button>

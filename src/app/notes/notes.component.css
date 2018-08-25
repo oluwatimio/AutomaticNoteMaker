@@ -7,3 +7,8 @@
 .example-full-width {
   width: 100%;
 }
+
+.material-icons{
+  width: 24px !important;
+  height: 24px !important;
+}

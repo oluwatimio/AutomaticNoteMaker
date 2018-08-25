@@ -13,8 +13,14 @@ export class NotesComponent implements OnInit {
   textSizes = [9, 10, 11, 12, 13, 14, 18, 24, 36, 48, 64, 72];
   concepts: string[] = new Array();
   concept: string;
+  noteTitle: string;
+  noteContent: string;
+  textSize: string;
   constructor(private http: HttpClient) {
     this.concept = '';
+    this.noteTitle = '';
+    this.noteContent = '';
+    this.textSize = '20px';
   }
 
   ngOnInit() {
@@ -34,23 +40,29 @@ export class NotesComponent implements OnInit {
   }
 
   changeTextSizes(number: any) {
-
     console.log(number);
     document.getElementById('textSize').style.fontSize = number.toString() + 'px';
+    this.textSize = number.toString();
   }
 
   addConcept() {
-    this.concepts.push(this.concept);
-    this.concept = '';
+    if (this.concept != '') {
+      this.concepts.push(this.concept);
+      this.concept = '';
+    }
   }
 
   saveNote() {
+<<<<<<< HEAD
    // const note = new Note()
+=======
+    const note = new Note(this.concepts, this.noteTitle, this.noteContent, this.textSize);
+>>>>>>> df484a5b5e2ee0fa82ff756b5421affcbfc69f21
   }
 
 
-  getData() {
-    this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=anatomy', 'callback').subscribe((data) => {
+  getData(clicked: string) {
+    this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=' + clicked, 'callback').subscribe((data) => {
       console.log(data);
     });
   }
