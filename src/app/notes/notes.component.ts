@@ -231,7 +231,7 @@ export class NotesComponent implements OnInit {
   moreNote(link: string, query: string) {
     const val = 'www.britannica.com';
     this.http.get('https://www.googleapis.com/customsearch/v1?q=' + query + '&cx=009888275505230810294%3Adnzxawmtgru&excludeTerms=patent&siteSearch='
-      + val + '&key=AIzaSyDdRbV4v-GaAum5qzcUl693akHJGyLrUMM').subscribe((data) => {
+      + link + '&key=AIzaSyDdRbV4v-GaAum5qzcUl693akHJGyLrUMM').subscribe((data) => {
         console.log(data['items']);
         for (let i = 0; i < data['items'].length; i++) {
           const item = new ResearchedData(data['items'][i]['snippet'], data['items'][i]['formattedUrl']);
@@ -239,6 +239,22 @@ export class NotesComponent implements OnInit {
         }
         console.log(this.researchedData);
     });
+  }
+
+  addToNote2(selectedData: any) {
+    for (let i = 0; i < selectedData.length; i++) {
+      const research = new ResearchedData(selectedData[i].value.description, selectedData[i].value.link);
+      const str = '" '  + research.description + '\n' + '"' + research.link + '\n';
+      this.noteContent = this.noteContent + '\n\n' + str;
+    }
+
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
+
+    const d = new MDCDialog(document.querySelector('#aiDialog'));
+    d.close();
   }
 
 

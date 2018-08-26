@@ -144,7 +144,7 @@
   </aside>
 <aside class="mdc-dialog" id="aiDialog">
   <div class="mdc-dialog__surface" id="aiDialogSurface">
-    <h1 style="color: #880e4f; margin-left: 1vw ">Share {{noteTitle}} with...</h1>
+    <h1 style="color: #880e4f; margin-left: 1vw ">Notar.ai</h1>
     <form class="example-form" style="margin-left: 1vw; margin-right: 1vw">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Concept Name" style="font-size: large; color: black" [value]="conceptName"
@@ -155,16 +155,18 @@
                (input) = "webSite = $event.target.value">
       </mat-form-field>
     </form>
-    <button mat-button (click)="moreNote(webSite, conceptName)"></button>
-    <mat-selection-list #inActiveEventsM>
+
+    <body style="overflow-y: scroll">
+    <mat-selection-list #researched>
       <mat-list-option *ngFor="let research of researchedData" [value]="research" >
         <h3 matLine>{{research.description}}</h3>
         <h6 matLine>{{research.link}}</h6>
       </mat-list-option>
     </mat-selection-list>
+    </body>
     <footer class="mdc-dialog__footer">
-      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeShareDialog()">CANCEL</button>
-      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="moreNote(webSite, conceptName)">SHARE</button>
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="moreNote(webSite, conceptName)">Notar.AI</button>
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote2(researched.selectedOptions.selected)">ADD TO NOTE</button>
     </footer>
   </div>
 </aside>
