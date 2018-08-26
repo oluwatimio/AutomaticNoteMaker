@@ -27,11 +27,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SigninComponent } from './signin/signin.component';
 import {AuthService} from './auth.service';
 import { OnboardingComponent } from './onboarding/onboarding.component';
+import { CreateclassroomComponent } from './createclassroom/createclassroom.component';
+import { AddclassroomComponent } from './addclassroom/addclassroom.component';
 
 const routes: Routes = [
   {path: '', component: TabsComponent},
   {path: 'signin', component: SigninComponent},
-  {path: 'onboard', component: OnboardingComponent}
+  {path: 'onboard', component: OnboardingComponent},
+  {path: 'createclassroom', component: CreateclassroomComponent},
+  {path: 'addclassroom', component: CreateclassroomComponent}
+
 ];
 
 @NgModule({
@@ -43,7 +48,9 @@ const routes: Routes = [
     ToolbarComponent,
     TabsComponent,
     SigninComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    CreateclassroomComponent,
+    AddclassroomComponent
   ],
   imports: [
     BrowserModule,

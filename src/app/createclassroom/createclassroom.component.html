@@ -1,0 +1,14 @@
+<div style="margin-top: 10vh">
+  <div class="mdc-text-field mdc-text-field--outlined passt" style="margin-top: 2vh">
+    <input type="text" id="tf-outlined" class="mdc-text-field__input" type="tex" [value] = "classcode"
+           (input) = "classcode = $event.target.value">
+    <label for="tf-outlined" class="mdc-floating-label">Password</label>
+    <div class="mdc-notched-outline">
+      <svg>
+        <path class="mdc-notched-outline__path"/>
+      </svg>
+    </div>
+    <div class="mdc-notched-outline__idle"></div>
+  </div>
+  <button mat-flat-button (click)="createclass()" style="background-color: #880e4f">DONE</button>
+</div>

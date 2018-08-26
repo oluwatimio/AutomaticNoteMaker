@@ -2,4 +2,18 @@
   <h1 style="font-family: Roboto">
     Professor? or Student?
   </h1>
+  <mat-selection-list #shoes>
+    <mat-list-option *ngFor="let person of typesOfPerson">
+      {{person}}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <p>
+    Options selected: {{shoes.selectedOptions.selected.length}}
+  </p>
+  <p>Only one selection allowed</p>
+
+  <div fxLayoutAlign="center center">
+    <button mat-flat-button style="background-color: #880e4f" (click)="goNext()">Next</button>
+  </div>
 </div>
