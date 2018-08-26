@@ -21,19 +21,23 @@ label{
   color: #880e4f;
 }
 
-.mdc-dialog__surface{
+.mdc-dialog__surface {
   max-width: none;
   min-width: auto !important;
+}
+
+.mainDialogSurface {
+  max-height: 100%;
   width: 100%;
   height: 100%;
 }
 
 #wikiDialogSurface {
+  max-height: 90%;
   width: 50%;
-  height: 90%;
 }
 
 #shareDialogSurface {
+  max-height: 90%;
   width: 30%;
-  height: 30%;
 }
