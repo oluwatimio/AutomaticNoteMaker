@@ -17,7 +17,7 @@ export class AuthService {
   }
   signIn(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('tabs');
     }).catch((error) => {
       console.log(error.code);
       if (error.code === 'auth/user-not-found') {
@@ -30,7 +30,7 @@ export class AuthService {
 
   signUp(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((response) => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('tabs');
     }).catch((error) => {
       alert(error.message);
     });

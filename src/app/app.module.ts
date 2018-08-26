@@ -31,8 +31,8 @@ import { CreateclassroomComponent } from './createclassroom/createclassroom.comp
 import { AddclassroomComponent } from './addclassroom/addclassroom.component';
 
 const routes: Routes = [
-  {path: '', component: TabsComponent},
-  {path: 'signin', component: SigninComponent},
+  {path: 'tabs', component: TabsComponent},
+  {path: '', component: SigninComponent},
   {path: 'onboard', component: OnboardingComponent},
   {path: 'createclassroom', component: CreateclassroomComponent},
   {path: 'addclassroom', component: CreateclassroomComponent}
