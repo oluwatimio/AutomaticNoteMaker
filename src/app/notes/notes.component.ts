@@ -172,6 +172,7 @@ export class NotesComponent implements OnInit {
   }
 
   updateNote() {
+    console.log(this.viewingNote)
     const db = firebase.firestore().collection('userNotes').doc(this.viewingNote.docRef).update({
       concepts: this.concepts,
       noteTitle: this.noteTitle,
