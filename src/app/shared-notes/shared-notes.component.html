@@ -1,3 +1,83 @@
-<p>
-  shared-notes works!
-</p>
+<aside class="mdc-dialog" id="viewandEdit">
+    <div class="mdc-dialog__surface mainDialogSurface">
+      <h1 style="color: #880e4f; margin-left: 1vw ">View Note</h1>
+      <div fxLayout="row" style="width: 100%; margin-left: 1vw">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Title" style="font-size: large; color: black" [value]="noteTitle"
+                   (input) = "noteTitle = $event.target.value">
+          </mat-form-field>
+        </form>
+        <form class="example-form">
+          <mat-form-field>
+            <mat-select placeholder="Select a size">
+              <mat-option *ngFor="let sizes of textSizes" [value]="sizes" (onSelectionChange)="changeTextSizes(sizes)">
+                {{sizes}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button style="font-size: 15px; color: #880e4f;">B</button>
+          <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">I</button>
+          <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">U</button>
+        </form>
+      </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row">
+        <div style="width: 20%;">
+          <h1 style="margin-left: 1vw; color: #880e4f">Add Keywords or Concepts</h1>
+          <div style="margin-left: 1vw">
+            <mat-chip-list>
+              <mat-chip *ngFor="let concept of concepts" style="color: white; background-color: #880e4f" (click)="openWikiDialog(concept)">{{concept}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <form class="example-form" style="bottom: 50px; position: fixed; margin-left: 1vw">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Type a concept" [value]="concept"
+                     (input) = "concept = $event.target.value" style="font-size: large; color: black">
+            </mat-form-field>
+            <button mat-button style="text-align: left" (click)="addConcept()">Add</button>
+          </form>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div style="width: 80%">
+          <section id="my-mdc-dialog-description" class="mdc-dialog__body" style="height: 80vh">
+            <mat-form-field class="example-full-width" style="">
+              <textarea matInput cols="30" rows="26" placeholder="Type here" style="color: black" id="textSize" [value]="noteContent"
+                        (input) = "noteContent = $event.target.value"></textarea>
+            </mat-form-field>
+          </section>
+        </div>
+      </div>
+      <footer class="mdc-dialog__footer" style="bottom: 0;">
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel" style="color: #880e4f" (click)="closeDiag()">CANCEL</button>
+        <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f" (click)="updateNote()">RESEARCH</button>
+      </footer>
+       </div>
+    <div class="mdc-dialog__backdrop"></div>
+</aside>
+<aside class="mdc-dialog" id="wikiDialog">
+    <div class="mdc-dialog__surface" id="wikiDialogSurface">
+        <h1 style="color: #880e4f; margin-left: 1vw ">{{keywordName}}</h1>
+  
+        <body style="overflow-y: auto;">
+          <p style="margin-left: 2vh; margin-right: 2vh">{{extract}}</p>
+        </body>
+        <footer class="mdc-dialog__footer">
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeWikiDialog(extract)">CANCEL</button>
+            <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="addToNote(extract)">ADD TO NOTE</button>
+        </footer>
+    </div>
+  </aside>
+<div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-top: 2vh; margin-bottom: 2vh">
+    <mat-card *ngFor="let note of userNotes"
+              style="height: 150px; width: 250px;
+               border-radius: 15px; margin-top: 1vh; margin-left: 1vw" (click)="viewNote(note)">
+    <mat-card-header>
+    <mat-card-title>{{note.title}}</mat-card-title>
+    <mat-card-subtitle style="color: darkmagenta; font-size: 12px">August 25, 2018 </mat-card-subtitle>
+    </mat-card-header>
+    <div *ngIf="note.note !== undefined">
+      <p>{{note.note.substr(0,120)}}...</p>
+    </div>
+    </mat-card>
+  </div>
