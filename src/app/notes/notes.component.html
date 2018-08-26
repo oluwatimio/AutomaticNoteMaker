@@ -149,6 +149,9 @@
   <mat-card-title>{{note.title}}</mat-card-title>
   <mat-card-subtitle style="color: darkmagenta; font-size: 12px">August 25, 2018 </mat-card-subtitle>
   </mat-card-header>
+  <div *ngIf="note.note !== undefined">
+    <p>{{note.note.substr(0,120)}}...</p>
+  </div>
   </mat-card>
 </div>
 
