@@ -147,11 +147,11 @@
     <h1 style="color: #880e4f; margin-left: 1vw ">Notar.ai</h1>
     <form class="example-form" style="margin-left: 1vw; margin-right: 1vw">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Concept Name" style="font-size: large; color: black" [value]="conceptName"
+        <input matInput placeholder="Enter a concept name or keyword" style="font-size: large; color: black" [value]="conceptName"
                (input) = "conceptName = $event.target.value">
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Web Site Search" style="font-size: large; color: black" [value]="webSite"
+        <input matInput placeholder="Enter a full website link you'll like to search (eg. www.britannica.com)" style="font-size: large; color: black" [value]="webSite"
                (input) = "webSite = $event.target.value">
       </mat-form-field>
     </form>

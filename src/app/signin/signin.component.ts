@@ -3,6 +3,7 @@ import {MDCTextField} from '@material/textfield';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-signin',
@@ -15,7 +16,7 @@ export class SigninComponent implements OnInit {
   router: Router;
   auths: AuthService;
   ngZone: NgZone;
-  constructor(router: Router, auths: AuthService, ngZone: NgZone) {
+  constructor(router: Router, auths: AuthService, ngZone: NgZone, public snackbar: MatSnackBar) {
     this.email = '';
     this.password = '';
     this.router = router;
@@ -27,6 +28,7 @@ export class SigninComponent implements OnInit {
 
     this.auths.user.subscribe((user) => {
       if (user !== undefined && user !== null) {
+        this.snackbar.open('Hey you!, Welcome Back :)', null, {duration: 5000});
         this.ngZone.run(() => this.router.navigateByUrl('tabs'));
       }
     });
