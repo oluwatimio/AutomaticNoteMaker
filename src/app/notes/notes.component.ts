@@ -135,11 +135,9 @@ export class NotesComponent implements OnInit {
     this.http.jsonp('https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&explaintext&exsectionformat=plain&titles=' + clicked, 'callback').subscribe((data) => {
       var pages = data['query']['pages'];
       var obj = pages[Object.keys(pages)[0]]['extract'];
-      var short = obj.split('\n')[0] + '\n' + obj.split('\n')[1] + '\n' + obj.split('\n')[2] + 
-      obj.split('\n')[3] + '\n' + obj.split('\n')[4] + '\n' + obj.split('\n')[5] + 
-      obj.split('\n')[6] + '\n' + obj.split('\n')[7] + '\n' + obj.split('\n')[8];
+      var short = '"' + obj.split('\n\n')[0] + '\n\n' + obj.split('\n\n')[1] + '"' + '\n\n' + '-Wikipedia';
       this.extract = short;
-      console.log(short);
+      console.log(this.extract);
     });
   }
 
