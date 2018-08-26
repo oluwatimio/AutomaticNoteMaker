@@ -5,6 +5,7 @@ import {AuthService} from '../auth.service';
 import * as firebase from 'firebase';
 import {NoteDownloaded} from './NoteDownloaded';
 import {MatSnackBar} from '@angular/material';
+import {ResearchedData} from './ResearchedData';
 
 declare var require: any;
 
@@ -25,9 +26,12 @@ export class NotesComponent implements OnInit {
   noteDialog: any;
   wikiDialog: any;
   shareDialog: any;
+  conceptName: string;
   userNotes: NoteDownloaded[] = new Array();
+  researchedData: ResearchedData[] = new Array();
   auths: AuthService;
   user: any;
+  webSite: string;
   viewingNote: NoteDownloaded;
   groupCode: string;
   constructor(private http: HttpClient, auths: AuthService, public snackbar: MatSnackBar) {
@@ -39,6 +43,8 @@ export class NotesComponent implements OnInit {
     this.extract = '';
     this.auths = auths;
     this.groupCode = '';
+    this.conceptName = '';
+    this.webSite = '';
   }
 
   ngOnInit() {
@@ -210,6 +216,28 @@ export class NotesComponent implements OnInit {
     this.viewingNote = undefined;
 
     this.noteDialog.close();
+  }
+
+  openNotar() {
+    const mdcDialog = require('@material/dialog');
+    const MDCDialog = mdcDialog.MDCDialog;
+    const MDCDialogFoundation = mdcDialog.MDCDialogFoundation;
+    const util = mdcDialog.util;
+
+    const d = new MDCDialog(document.querySelector('#aiDialog'));
+    d.show();
+  }
+  moreNote(link: string, query: string) {
+    const val = 'www.britannica.com';
+    this.http.get('https://www.googleapis.com/customsearch/v1?q=' + query + '&cx=009888275505230810294%3Adnzxawmtgru&excludeTerms=patent&siteSearch='
+      + val + '&key=AIzaSyDdRbV4v-GaAum5qzcUl693akHJGyLrUMM').subscribe((data) => {
+        console.log(data['items']);
+        for (let i = 0; i < data['items'].length; i++) {
+          const item = new ResearchedData(data['items'][i]['snippet'], data['items'][i]['formattedUrl']);
+          this.researchedData.push(item);
+        }
+        console.log(this.researchedData);
+    });
   }
 
 

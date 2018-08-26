@@ -19,6 +19,7 @@
           <button mat-icon-button style="font-size: 15px; color: #880e4f;">B</button>
           <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">I</button>
           <button mat-icon-button style="font-size: 15px; color: #880e4f; font-style: italic">U</button>
+          <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; position: absolute; right: 1vw; margin-top: 1vw" (click)="openNotar()">Notar.ai</button>
         </form>
       </div>
     <mat-divider></mat-divider>
@@ -141,12 +142,38 @@
         </footer>
     </div>
   </aside>
+<aside class="mdc-dialog" id="aiDialog">
+  <div class="mdc-dialog__surface" id="aiDialogSurface">
+    <h1 style="color: #880e4f; margin-left: 1vw ">Share {{noteTitle}} with...</h1>
+    <form class="example-form" style="margin-left: 1vw; margin-right: 1vw">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Concept Name" style="font-size: large; color: black" [value]="conceptName"
+               (input) = "conceptName = $event.target.value">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Web Site Search" style="font-size: large; color: black" [value]="webSite"
+               (input) = "webSite = $event.target.value">
+      </mat-form-field>
+    </form>
+    <button mat-button (click)="moreNote(webSite, conceptName)"></button>
+    <mat-selection-list #inActiveEventsM>
+      <mat-list-option *ngFor="let research of researchedData" [value]="research" >
+        <h3 matLine>{{research.description}}</h3>
+        <h6 matLine>{{research.link}}</h6>
+      </mat-list-option>
+    </mat-selection-list>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="closeShareDialog()">CANCEL</button>
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__action" style="color: #880e4f; right: 20px; bottom: 20px; margin-top: 30px" (click)="moreNote(webSite, conceptName)">SHARE</button>
+    </footer>
+  </div>
+</aside>
 <div fxLayout="row wrap" fxLayoutAlign="center center" style="margin-top: 2vh; margin-bottom: 2vh">
   <mat-card *ngFor="let note of userNotes"
             style="height: 150px; width: 250px;
              border-radius: 15px; margin-top: 1vh; margin-left: 1vw" (click)="viewNote(note)">
   <mat-card-header>
-  <mat-card-title>{{note.title}}</mat-card-title>
+  <mat-card-title style="font-size: large">{{note.title}}</mat-card-title>
   <mat-card-subtitle style="color: darkmagenta; font-size: 12px">August 25, 2018 </mat-card-subtitle>
   </mat-card-header>
   <div *ngIf="note.note !== undefined">

@@ -41,3 +41,8 @@ label{
   max-height: 90%;
   width: 30%;
 }
+
+#aiDialogSurface {
+  max-height: 90%;
+  width: 50%;
+}
