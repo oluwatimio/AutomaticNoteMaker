@@ -184,6 +184,7 @@ export class NotesComponent implements OnInit {
       this.noteTitle = '';
       this.noteContent = '';
       this.textSize = '';
+      this.closeDiag()
       this.snackbar.open('Note Updated', null, {duration: 5000});
     });
   }
@@ -208,6 +209,8 @@ export class NotesComponent implements OnInit {
     this.concepts = new Array();
     this.noteContent = '';
     this.viewingNote = undefined;
+
+    this.noteDialog.close();
   }
 
 
