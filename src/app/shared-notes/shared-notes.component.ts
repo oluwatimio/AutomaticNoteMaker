@@ -5,6 +5,8 @@ import {NoteDownloaded} from '../notes/NoteDownloaded';
 import * as firebase from 'firebase';
 import {MatSnackBar} from '@angular/material';
 
+declare var require: any;
+
 @Component({
   selector: 'app-shared-notes',
   templateUrl: './shared-notes.component.html',
@@ -185,6 +187,8 @@ export class SharedNotesComponent implements OnInit {
     this.concepts = new Array();
     this.noteContent = '';
     this.viewingNote = undefined;
+
+    this.noteDialog.close();
   }
 
 }
